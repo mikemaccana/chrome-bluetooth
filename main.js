@@ -6,10 +6,10 @@
  */
 chrome.app.runtime.onLaunched.addListener(function() {
   // Center window on screen.
-  var screenWidth = screen.availWidth;
-  var screenHeight = screen.availHeight;
-  var width = 500;
-  var height = 300;
+  var screenWidth = screen.availWidth,
+    screenHeight = screen.availHeight,
+    width = 500,
+    height = 300;
 
   chrome.app.window.create('index.html', {
     id: "helloWorldID",
@@ -21,7 +21,15 @@ chrome.app.runtime.onLaunched.addListener(function() {
     }
   });
 
-  var log = console.log.bind(console)
+  var log = console.log.bind(console);
 
-  log('Hello')
+  log('Hello');
+
+  chrome.bluetooth.onDeviceAdded.addListener(function(device){
+    log('Discovered device!', device)
+  })
+
+  chrome.bluetooth.startDiscovery(function(){
+    log('Started discovery');
+  });
 });

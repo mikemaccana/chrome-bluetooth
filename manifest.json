@@ -1,6 +1,6 @@
 {
+  "name": "Sandpit Chrome Bluetooth test",
   "manifest_version": 2,
-  "name": "Hello World",
   "version": "2.1",
   "minimum_chrome_version": "23",
   "icons": {
@@ -11,5 +11,22 @@
     "background": {
       "scripts": ["main.js"]
     }
+  },
+  "bluetooth": {
+    // Permission for chrome.bluetoothLowEnergy:
+    // The application is allowed to communicate with devices
+    // using the profiles identified by the UUIDs 0x180D, 0x1809 and 0x180F
+    // using the BluetoothLowEnergy API.
+    // From [1] https://www.bluetooth.org/en-us/specification/assigned-numbers/generic-attribute-profile
+    // [2] http://teleorigin.com/download/Bluetooth/Low%20Energy/Profile_development_BLE.pdf
+    "uuids": [
+      "1800", // Generic access
+      "1801", // Generic attribute ('the only attribute used inBluetooth low energy' see [2])
+      "1809", // Temperature
+      "180A", // Device information
+      "180D", // Heart rate
+      "180F"
+    ],
+    "low_energy": true
   }
 }
