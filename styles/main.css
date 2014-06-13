@@ -2,21 +2,42 @@ html, body {
   height: 100%;
 }
 
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
 body {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-image: url("../hello_world.png"), -webkit-radial-gradient(center, ellipse cover,#FFFFFF 0%,#FAFAFA 50%,#F5F5F5 60%,#BEBEBE 100%);
+  background-color: rgb(15, 11, 49);
   margin: 0;
-  padding: 0;
+  padding: 12px;
+  font-family: 'Lato', sans-serif;
+  font-size: 18pt;
+  color: whiteSmoke;
+  text-align: center;
+}
+
+p {
+
 }
 
 h1 {
   position: absolute;
   bottom: 20px;
-  text-align: center;
   width: 100%;
   line-height: 120%;
   font-family: Arial, sans-serif;
   color: rgb(66,66,66);
   letter-spacing: -0.05em;
 }
+
+button {
+  display: block;
+  background-color: whiteSmoke;
+  text-transform: uppercase;
+  padding: 10px;
+  margin: 10px auto;
+  font-size: 14pt;
+  color: #222;
+  border: 1px solid #222;
+}
+

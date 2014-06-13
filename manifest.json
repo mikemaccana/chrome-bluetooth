@@ -2,7 +2,7 @@
   "name": "Sandpit Chrome Bluetooth test",
   "manifest_version": 2,
   "version": "2.1",
-  "minimum_chrome_version": "23",
+  "minimum_chrome_version": "37",
   "icons": {
     "16": "icon_16.png",
     "128": "icon_128.png"

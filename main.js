@@ -1,9 +1,6 @@
-/**
- * Listens for the app launching then creates the window
- *
- * @see http://developer.chrome.com/apps/app.runtime.html
- * @see http://developer.chrome.com/apps/app.window.html
- */
+// Background page
+var log = console.log.bind(console);
+
 chrome.app.runtime.onLaunched.addListener(function() {
   // Center window on screen.
   var screenWidth = screen.availWidth,
@@ -21,15 +18,31 @@ chrome.app.runtime.onLaunched.addListener(function() {
     }
   });
 
-  var log = console.log.bind(console);
 
-  log('Hello');
+  chrome.runtime.onConnect.addListener(function(port) {
+    console.assert(port.name == "register");
+    port.onMessage.addListener(function(msg) {
+      var actions = {
+        scan: function(){
+          chrome.bluetooth.startDiscovery(function(){
+            port.postMessage({'update': "started scanning"});
+          });
 
-  chrome.bluetooth.onDeviceAdded.addListener(function(device){
-    log('Discovered device!', device)
-  })
-
-  chrome.bluetooth.startDiscovery(function(){
-    log('Started discovery');
+          chrome.bluetooth.onDeviceAdded.addListener(function(device){
+            var response = {'update': "found device"}
+            response.device = device
+            port.postMessage(response);
+          })
+        },
+        register: function(){
+          log('users wants to register')
+        }
+      }
+      actions[msg.action]()
+    })
   });
+
+
+
+
 });
