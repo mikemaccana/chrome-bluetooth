@@ -19,7 +19,7 @@ define(['ractive', 'text!uitemplate.mustache'], function(Ractive, uiTemplate){
 			currentStatus: 0,
 			statuses: [{
 				name: 'waiting',
-				description: 'Tap your device to log in or register'
+				description: 'Turn on Bluetooth visibility on your smartphone to log in or register'
 			},{
 				name: 'existing',
 				description: 'Welcome back'

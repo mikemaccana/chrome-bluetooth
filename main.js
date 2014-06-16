@@ -8,7 +8,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
     width = 500,
     height = 300;
 
-  chrome.app.window.create('index.html', {
+  chrome.app.window.create('html/index.html', {
     id: "helloWorldID",
     bounds: {
       width: width,

@@ -1,0 +1,9 @@
+{
+  "name": "chrome-bluetooth",
+  "description": "Chrome Bluetooth",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "gulp-sass": "^0.7.2"
+  }
+}
