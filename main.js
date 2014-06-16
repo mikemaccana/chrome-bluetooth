@@ -33,9 +33,6 @@ chrome.app.runtime.onLaunched.addListener(function() {
             response.device = device
             port.postMessage(response);
           })
-        },
-        register: function(){
-          log('users wants to register')
         }
       }
       actions[msg.action]()

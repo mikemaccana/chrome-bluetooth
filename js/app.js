@@ -1,5 +1,5 @@
 // UI
-define(['ractive', 'text!uitemplate.mustache'], function(Ractive, uiTemplate){
+define(['ractive', 'text!../views/uitemplate.mustache'], function(Ractive, uiTemplate){
 
 	var query = document.querySelector.bind(document),
 		queryAll = document.querySelectorAll.bind(document),
@@ -58,7 +58,7 @@ define(['ractive', 'text!uitemplate.mustache'], function(Ractive, uiTemplate){
 
 			} else {
 				UI.set('currentStatus', 2)
-				// We're an unknown device, show registartion UI
+				// We're an unknown device, show registration UI
 			}
 		}
 		// setTimeout
