@@ -36,7 +36,8 @@ define(['ractive', 'text!../views/uitemplate.mustache'], function(Ractive, uiTem
 				name: null
 			}
 		},
-		template: uiTemplate
+		template: uiTemplate,
+		showRegisterUI: false // Duplicates currentStatus, but we can't use evail in Chrome apps.
 	})
 
 	port.postMessage({action: "scan"});
@@ -55,9 +56,10 @@ define(['ractive', 'text!../views/uitemplate.mustache'], function(Ractive, uiTem
 			if ( knownDevice ) {
 				UI.set('user.name', knownDevice.name)
 				UI.set('currentStatus', 1)
-
+				UI.set('showRegisterUI', false)
 			} else {
 				UI.set('currentStatus', 2)
+				UI.set('showRegisterUI', true)
 				// We're an unknown device, show registration UI
 			}
 		}

@@ -33,6 +33,12 @@ body {
   @include vertical-center-child();
 }
 
+input {
+  padding: 6px;
+  font-size: 12pt;
+  margin: 12px;
+}
+
 p {
 
 }
