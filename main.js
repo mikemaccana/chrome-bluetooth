@@ -28,6 +28,12 @@ chrome.app.runtime.onLaunched.addListener(function() {
             port.postMessage({'update': "started scanning"});
           });
 
+          window.stopDiscovery = function(){
+            chrome.bluetooth.stopDiscovery(function(){
+              log('Discovery stopped')
+            })
+          }
+
           chrome.bluetooth.onDeviceAdded.addListener(function(device){
             var response = {'update': "found device"}
             response.device = device
@@ -38,8 +44,4 @@ chrome.app.runtime.onLaunched.addListener(function() {
       actions[msg.action]()
     })
   });
-
-
-
-
 });
