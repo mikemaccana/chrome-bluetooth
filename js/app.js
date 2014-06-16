@@ -22,7 +22,7 @@ define(['ractive', 'text!../views/uitemplate.mustache'], function(Ractive, uiTem
 				description: 'Turn on Bluetooth visibility on your smartphone to log in or register'
 			},{
 				name: 'existing',
-				description: 'Welcome back'
+				description: 'Welcome'
 			},{
 				name: 'registering',
 				description: 'Looks like you\'re new! Add your details below.'
@@ -40,30 +40,33 @@ define(['ractive', 'text!../views/uitemplate.mustache'], function(Ractive, uiTem
 		showRegisterUI: false // Duplicates currentStatus, but we can't use evail in Chrome apps.
 	})
 
+	var startUI = function(deviceType, deviceName, deviceAddress){
+		log('found '+deviceType+'! '+deviceName+' ('+deviceAddress+')');
+		UI.set('device', {
+			type: deviceType,
+			name: deviceName,
+			address: deviceAddress
+		})
+		var knownDevice = knownDevices[deviceAddress]
+		if ( knownDevice ) {
+			// We're a known device
+			UI.set('user.name', knownDevice.name)
+			UI.set('currentStatus', 1)
+			UI.set('showRegisterUI', false)
+		} else {
+			// We're an unknown device, show registration UI
+			UI.set('currentStatus', 2)
+			UI.set('showRegisterUI', true)
+		}
+	}
+
 	port.postMessage({action: "scan"});
 	port.onMessage.addListener(function(message) {
 		if (message.update == "started scanning") {
 			log('scanning started');
 		} else if (message.update == "found device") {
-			log('found '+message.device.type+'! '+message.device.name+' ('+message.device.address+')');
-			// We're a known device
-			UI.set('device', {
-				type: message.device.type,
-				name: message.device.name,
-				address: message.device.address
-			})
-			var knownDevice = knownDevices[message.device.address]
-			if ( knownDevice ) {
-				UI.set('user.name', knownDevice.name)
-				UI.set('currentStatus', 1)
-				UI.set('showRegisterUI', false)
-			} else {
-				UI.set('currentStatus', 2)
-				UI.set('showRegisterUI', true)
-				// We're an unknown device, show registration UI
-			}
+			startUI(message.device.type, message.device.name, message.device.address)
 		}
-		// setTimeout
 	});
 
 	query('body').addEventListener('click', function(ev){
@@ -71,6 +74,8 @@ define(['ractive', 'text!../views/uitemplate.mustache'], function(Ractive, uiTem
 		if ( ev.target.matches('button') ) {
 			knownDevices[UI.data.device.address] = {name: name}
 			log('saved user', name, knownDevices)
+			UI.set('currentStatus', 1)
+			UI.set('showRegisterUI', false)
 		}
 	})
 

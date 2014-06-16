@@ -21,6 +21,11 @@ body {
   display: table-cell;
   vertical-align: middle; }
 
+input {
+  padding: 6px;
+  font-size: 12pt;
+  margin: 12px; }
+
 h1 {
   position: absolute;
   bottom: 20px;
