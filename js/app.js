@@ -66,9 +66,13 @@ define(['ractive', 'text!../views/uitemplate.mustache'], function(Ractive, uiTem
 		// setTimeout
 	});
 
-	// query('button').addEventListener('click', function(ev){
-	// 	log('clicked')
-	// })
+	query('body').addEventListener('click', function(ev){
+		var name = query('input').value
+		if ( ev.target.matches('button') ) {
+			knownDevices[UI.data.device.address] = {name: name}
+			log('saved user', name, knownDevices)
+		}
+	})
 
 })
 
